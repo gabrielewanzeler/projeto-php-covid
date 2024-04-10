@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2906/2906274.png" type="image/png"/>
+    <title>Consulta de Casos de Covid-19</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header-container">
+        <div class="header-content">
+                <h1 class="main-title">Consulta de Casos de Covid-19</h1>
+                <img src= "https://cdn-icons-png.flaticon.com/512/2232/2232778.png" alt="Análise de dados"/>
+        </div>
+    </header>
+    <main>
+
+    <div class="container-visor">
+        <h1>Covid-19</h1>
+        <h3>Painel Coronavírus</h3>
+        <p>Casos e Óbitos</p>
+    </div>
+    <form id="countryForm">
+        <label for="countrySelect">Escolha um país:</label>
+        <select id="countrySelect">
+            <option value="Brazil">BRASIL</option>
+            <option value="Canada">CANADÁ</option>
+            <option value="Australia">AUSTRÁLIA</option>
+        </select>
+        <button type="submit">CONSULTAR</button>
+    </form>
+    <!-- Formulário para selecionar dois países para comparação -->
+    <div class="container-visor2 hide">
+        <h1>País:</h1>
+    </div>
+    <div class="cont-grid">
+        <div id="totalStats" class="hide">
+            <h2>Estatísticas Totais</h2>
+            <p id="confirmedCases">Casos Confirmados: <span id="confirmedCasesNumber"></span></p>
+            <p id="totalDeaths">Total de mortes no país: <span id="totalDeathsNumber"></span></p>
+        </div>
+        
+        <div id="stateStats" class="hide">
+            <h2>Estatísticas por Estado</h2>
+                <ul id="stateList"></ul>
+        </div>
+    </div>
+    <div class="info hide">
+        <h3> Gráfico referente ao número de casos confirmados de cada estado</h3>
+    </div>
+    <div class="chart-container">
+            <canvas id="chart"></canvas>
+        </div>
+
+    </main>
+
+    <footer id="footer" >
+        <p id="lastUpdate"> </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
