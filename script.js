@@ -1,20 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const countryform = document.getElementById('countryForm');
+    
     const countrySelect = document.getElementById('countrySelect');
     const stateListElement = document.getElementById('stateList');
     const lastUpdateElement = document.getElementById('lastUpdate');
     const containerVisor2 = document.querySelector('.container-visor2 h1');
-    const selectedCountry = countrySelect.value;
 
     countryForm.addEventListener('submit', function (event) {
         event.preventDefault();
         const selectedCountry = countrySelect.value;
         fetchData(selectedCountry);
         updateLastUpdate(selectedCountry);
-    
         document.querySelector(".container-visor2").classList.remove("hide");
-        containerVisor2.textContent = `País: ${selectedCountry}`;
-    });    
+        containerVisor2.textContent = `País: ${selectedCountry}`;   
 
     function fetchData(country) {
         console.log(`Solicitando dados da API-Covid-19 para o país ${country}`);
@@ -27,12 +24,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`Dados recebidos da API-Covid-19 para o país ${country}:`, data);
                 updateTotalStats(data);
                 updateStateStats(data);
-                updateLastUpdate(country);
                 storeAccessData(country);
                 createChart(data);
+                updateLastUpdate(country);
             })
             .catch(error => console.error('Erro ao obter dados:', error));
     }
+});
     
     function updateTotalStats(data) {
         
@@ -41,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
         document.getElementById('confirmedCasesNumber').textContent = totalCases.toLocaleString('pt-BR');
         document.getElementById('totalDeathsNumber').textContent = totalDeaths.toLocaleString('pt-BR');
-    
         document.querySelector("#totalStats").classList.remove("hide");
     }
     
@@ -83,24 +80,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function updateLastUpdate(country) {
-        const currentDate = new Date();
-        const day = currentDate.getDate();
-        const month = currentDate.getMonth() + 1;
-        const year = currentDate.getFullYear();
-        const hours = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
-        const seconds = currentDate.getSeconds();
+        fetch('store_access_data.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    const lastAccess = new Date(data.access_time);
+                    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                    const formattedDate = lastAccess.toLocaleDateString('pt-BR', options);
+                    const formattedTime = lastAccess.toLocaleTimeString('pt-BR');
+                    lastUpdateElement.textContent = `Último acesso: ${formattedDate}, ${formattedTime} - País acessado: ${data.country}`;
+                } else {
+                    lastUpdateElement.textContent = `Não há dados de acesso anteriores.`;
+                }
+            })
+            .catch(error => console.error('Erro ao obter dados de último acesso:', error));
+    }    
     
-        const formattedDay = (day < 10 ? '0' : '') + day;
-        const formattedMonth = (month < 10 ? '0' : '') + month;
-        const formattedHours = (hours < 10 ? '0' : '') + hours;
-        const formattedMinutes = (minutes < 10 ? '0' : '') + minutes;
-        const formattedSeconds = (seconds < 10 ? '0' : '') + seconds;
-    
-        const formattedDate = `${formattedDay}/${formattedMonth}/${year}, ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-    
-        lastUpdateElement.textContent = `Última Atualização de Acesso: ${formattedDate} (País: ${country})`;
-    }
+    updateLastUpdate();
+
     function storeAccessData(country) {
         const currentDate = new Date();
         const requestData = {
@@ -123,8 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Erro ao enviar os dados de acesso:', error));
     }
-    
-    updateLastUpdate(selectedCountry);
+    //updateLastUpdate(selectedCountry);
     
     function createChart(data) {
         const labels = [];

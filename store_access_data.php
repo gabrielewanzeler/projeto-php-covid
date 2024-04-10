@@ -8,28 +8,50 @@ $bancodedados = "covid";
 
 $mysqli = new mysqli($hostname, $usuario, $senha, $bancodedados);
 
-
 if ($mysqli->connect_error) {
     die("Conexão falhou: " . $mysqli->connect_error);
 }
 
-// os dados da requisição POST
-$data = json_decode(file_get_contents('php://input'), true);
+// Verificar se é uma solicitação POST para armazenar os dados de acesso
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // os dados da requisição POST
+    $data = json_decode(file_get_contents('php://input'), true);
 
-// Insira os dados no banco de dados usando prepared statements
-$stmt = $mysqli->prepare("INSERT INTO access_logs (country, access_time) VALUES (?, ?)");
-$stmt->bind_param("ss", $country, $accessTime);
+    // Insira os dados no banco de dados usando prepared statements
+    $stmt = $mysqli->prepare("INSERT INTO access_logs (country, access_time) VALUES (?, ?)");
+    $stmt->bind_param("ss", $country, $accessTime);
 
-$country = $mysqli->real_escape_string($data['country']);
-$accessTime = date('Y-m-d H:i:s', strtotime($data['accessTime']));
+    $country = $mysqli->real_escape_string($data['country']);
+    $accessTime = date('Y-m-d H:i:s', strtotime($data['accessTime']));
 
-if ($stmt->execute()) {
-    echo "Dados de acesso armazenados com sucesso.";
-} else {
-    echo "Erro ao armazenar os dados de acesso: " . $mysqli->error;
+    if ($stmt->execute()) {
+        echo "Dados de acesso armazenados com sucesso.";
+    } else {
+        echo "Erro ao armazenar os dados de acesso: " . $mysqli->error;
+    }
+
+    // Fecha a conexão com o banco de dados
+    $stmt->close();
 }
 
-// Fecha a conexão com o banco de dados
-$stmt->close();
+// Verificar se é uma solicitação GET para obter os dados do último acesso
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    // Consulta SQL para recuperar o último acesso
+    $sql = "SELECT country, access_time FROM access_logs ORDER BY access_time DESC LIMIT 1";
+    $resultado = $mysqli->query($sql);
+
+    if ($resultado->num_rows > 0) {
+        // Converter o resultado em um array associativo
+        $row = $resultado->fetch_assoc();
+        // Retornar os dados como JSON
+        echo json_encode($row);
+    } else {
+        // Se não houver dados, retornar um JSON vazio
+        echo json_encode(null);
+    }
+}
+
+// Fechar a conexão com o banco de dados
 $mysqli->close();
+
 ?>
