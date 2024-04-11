@@ -12,9 +12,9 @@ if ($mysqli->connect_error) {
     die("Conexão falhou: " . $mysqli->connect_error);
 }
 
-// Verificar se é uma solicitação POST para armazenar os dados de acesso
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // os dados da requisição POST
+
     $data = json_decode(file_get_contents('php://input'), true);
 
     // Insira os dados no banco de dados usando prepared statements
@@ -30,13 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erro ao armazenar os dados de acesso: " . $mysqli->error;
     }
 
-    // Fecha a conexão com o banco de dados
     $stmt->close();
 }
 
-// Verificar se é uma solicitação GET para obter os dados do último acesso
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    // Consulta SQL para recuperar o último acesso
+
     $sql = "SELECT country, access_time FROM access_logs ORDER BY access_time DESC LIMIT 1";
     $resultado = $mysqli->query($sql);
 
@@ -46,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         // Retornar os dados como JSON
         echo json_encode($row);
     } else {
-        // Se não houver dados, retornar um JSON vazio
+
         echo json_encode(null);
     }
 }

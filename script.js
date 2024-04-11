@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
                     const formattedDate = lastAccess.toLocaleDateString('pt-BR', options);
                     const formattedTime = lastAccess.toLocaleTimeString('pt-BR');
-                    lastUpdateElement.textContent = `Último acesso: ${formattedDate}, ${formattedTime} - País acessado: ${data.country}`;
+                    lastUpdateElement.textContent = `Última busca: ${formattedDate}, ${formattedTime} - País acessado: ${data.country}`;
                 } else {
                     lastUpdateElement.textContent = `Não há dados de acesso anteriores.`;
                 }
