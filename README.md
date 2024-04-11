@@ -35,12 +35,14 @@ Visualize os dados e vá até o final da página.
 <br>
 <br>
 
-![image](https://github.com/gabrielewanzeler/projeto-php-covid/assets/109773605/15ae320c-19ba-4fa0-a782-81079a814745)
+![image](https://github.com/gabrielewanzeler/projeto-php-covid/assets/109773605/a5c53b8a-9d0b-4a17-8ad0-f1035ef0257a)
+
 
 <br>
 <br>
 
-![image](https://github.com/gabrielewanzeler/projeto-php-covid/assets/109773605/4fb1effa-ecdb-4164-bfde-6049e7eb0050)
+![image](https://github.com/gabrielewanzeler/projeto-php-covid/assets/109773605/980f3e36-c4e1-4c00-8cab-1ddf901439c6)
+
 <br>
 <br>
 <Strong><h2 align="center"> Ferramentas e Pré-requisitos:</h2></Strong>
