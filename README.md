@@ -83,6 +83,75 @@ Pronto! Agora você pode utilizar a aplicação localmente no seu próprio compu
 <br>
 <br>
 
+<Strong><h2 align="center"> Criar o banco de dados:</h2></Strong>
+
+- Este script assume que você já possui o MySQL instalado em sua máquina.
+- É recomendado que use o MySQL Workbench ou outro gerenciador de banco de dados para a criação e manipulação do BD.
+- Certifique-se de ter o MySQL instalado e configurado corretamente antes de prosseguir.
+<br>
+<br>
+
+Agora você pode criar um novo server (servidor) usando o MySQL Workbench, ou usar o padrão Hostname (com o nome de localhost), com a porta padrão 3306, configurar o nome do usuário (username) como: root e a senha (password) como preferir e se quiser, exemplo:
+
+<br>
+
+![image](https://github.com/gabrielewanzeler/projeto-php-covid/assets/109773605/ad8799aa-9e6a-492b-87fa-5154764eef1f)
+
+<br>
+
+Após a entrada no server, faça o seguinte em um arquivo de comando:
+
+
+<br>
+<br>
+
+Copie os dados do script a seguir:
+
+O banco de dados covid será criado se ainda não existir.
+
+Em seguida, ele seleciona o banco de dados covid.
+
+A tabela access_logs é criada com três colunas: id (chave primária), country, e access_time.
+<br>
+<br>
+
+Criar o banco de dados chamado covid:
+
+        CREATE DATABASE IF NOT EXISTS covid;
+        
+Usar o banco de dados
+
+        USE covid;
+
+Criar tabela para logs de acesso
+
+    CREATE TABLE IF NOT EXISTS access_logs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        country VARCHAR(255) NOT NULL,
+        access_time DATETIME NOT NULL
+    );
+
+Banco de dados criado...
+<br>
+<br>
+
+Agora, ainda considerando que está com a pasta clonada aberta, vá até o arquivo store_access_data.php (o arquivo responsável pelo back-end) e modifique essas linhas da imagem de acordo com a configuração do server em que foi criado o banco de dados covid. 
+
+Você pode modificar o usuário (modifique para o que você colocou no campo de username).
+
+Agora pode modificar o hostname, que é o nome do servidor (se for o local, permanece como localhost).
+
+E altere a senha de acordo com a que você colocou no server.
+
+<br>
+<br>
+
+O trecho do arquivo store_access_data.php a ser modificado:
+
+![image](https://github.com/gabrielewanzeler/projeto-php-covid/assets/109773605/916510b0-21fb-45df-8aee-1957af3a53e5)
+<br>
+<br>
+
 <Strong><h2 align="center"> Tecnologias Utilizadas:</h2></Strong>
 
 + HTML5
