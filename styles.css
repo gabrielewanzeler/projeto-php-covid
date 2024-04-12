@@ -18,7 +18,7 @@ button {
 }
 
 button:hover {
-    background-color: #339464;
+    background-color: #b1cac1;
 }
 
 form{
@@ -77,7 +77,7 @@ label{
 }
 
 #totalStats:hover{
-    background-color: #ececec;
+    background-color: #cbddd6;
 }
 
 #totalStats p{
@@ -121,7 +121,7 @@ label{
 }
 
 #stateStats:hover {
-    background-color: #ececec;
+    background-color: #cbddd6;
 }
 
 li {
@@ -132,7 +132,7 @@ li {
 }
 
 #countrySelect:hover {
-    background-color: #bfe6d2;
+    background-color: #c1d4cd;
 }
 
 .header-container {
@@ -145,7 +145,7 @@ li {
     align-items: center;
     max-width: 1650px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 6px;
     
 }
 
@@ -169,15 +169,19 @@ footer {
     background-color: #181415;
     color: white;
     width: 100%;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    height: 3.8rem;
+    height: 3.5rem;
+}
+
+footer p{
+    padding-top: 14px;
 }
 
 .chart-container {
     width: 90%;
-    margin: 30px 0 70px;
+    margin: 30px 0 40px;
     padding: 4px;
     margin-left: 50px;
     align-items: center;
@@ -186,6 +190,6 @@ footer {
 
 main {
     position: relative;
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh - 176px);
     overflow: auto; 
 }

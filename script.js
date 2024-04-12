@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                console.log(`Dados recebidos da API-Covid-19 para o país ${country}:`, data);
+                console.log(`Dados recebidos da API-Covid-19 para o país ${country}`);
                 updateTotalStats(data);
                 updateStateStats(data);
                 storeAccessData(country);
